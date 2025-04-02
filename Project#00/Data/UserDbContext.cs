@@ -7,8 +7,8 @@ namespace Project_00.Data
     {
         public UserDbContext(DbContextOptions options) : base(options)
         {
-        }
 
+        }
         public DbSet<User> Users { get; set; }
     }
 }

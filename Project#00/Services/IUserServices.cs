@@ -4,7 +4,7 @@ namespace Project_00.Services
 {
     public interface IUserServices
     {
-        public Task<User> RegisterUser(UserDto request);
-        public Task<User> LoginUser(UserDto request);
+        public Task<string> RegisterUser(UserDto request);
+        public Task<string> LoginUser(UserDto request);
     }
 }
