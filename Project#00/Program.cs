@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Project_00.Data;
+using Project_00.Mappings;
 using Project_00.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +16,10 @@ builder.Services.AddDbContext<UserDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
+builder.Services.AddAutoMapper(typeof(ProjectMapping));
+
 builder.Services.AddScoped<IUserServices, UserServices>();
+builder.Services.AddScoped<IProductServices, ProductServices>();
 
 var app = builder.Build();
 
