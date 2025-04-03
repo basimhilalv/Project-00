@@ -20,6 +20,7 @@ builder.Services.AddAutoMapper(typeof(ProjectMapping));
 
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<IProductServices, ProductServices>();
+builder.Services.AddScoped<ICategoryServices, CategoryServices>();
 
 var app = builder.Build();
 
