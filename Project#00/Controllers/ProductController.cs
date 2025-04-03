@@ -29,11 +29,11 @@ namespace Project_00.Controllers
             if (products is null) return NotFound("There are no products available");
             return Ok(products);
         }
-        [HttpGet("{Category}")]
+        [HttpGet("{category}")]
         public async Task<ActionResult<IEnumerable<Product>>> GetProductByCategory(string category)
         {
             var products = await _productServices.GetProductsByCategory(category);
-            if (products is null) return NotFound("There are nor products in the category");
+            if (products is null) return NotFound("There are no products in the category");
             return Ok(products);
         }
         [HttpPost("Create")]

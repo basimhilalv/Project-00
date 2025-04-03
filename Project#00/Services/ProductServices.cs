@@ -41,7 +41,7 @@ namespace Project_00.Services
 
         public async Task<Product> GetProduct(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products.Include(p=>p.Category).FirstOrDefaultAsync(p=>p.Id == id);
             if(product == null)
             {
                 return null;
@@ -51,14 +51,18 @@ namespace Project_00.Services
 
         public async Task<IEnumerable<Product>> GetProducts()
         {
-            var products = await _context.Products.ToListAsync();
+            var products = await _context.Products.Include(p=>p.Category).ToListAsync();
             if (products is null) return null;
             return products;
         }
 
         public async Task<IEnumerable<Product>> GetProductsByCategory(string category)
         {
-            var products = _context.Products.Where(p => p.Category.Name == category);
+            var products = await _context.Products
+                .Include(p=>p.Category)
+                .Where(p => p.Category.Name == category)
+                .ToListAsync();
+            
             if (products is null) return null;
             return products;
         }
