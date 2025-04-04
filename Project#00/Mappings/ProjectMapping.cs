@@ -13,6 +13,8 @@ namespace Project_00.Mappings
             CreateMap<ProductDto, Product>();
             CreateMap<Category, CategoryDto>();
             CreateMap<CategoryDto, Category>();
+            CreateMap<Cart, CartDto>();
+            CreateMap<CartDto, Cart>();
         }
     }
 }

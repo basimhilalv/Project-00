@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project_00.Models;
 using Project_00.Services;
@@ -22,6 +23,7 @@ namespace Project_00.Controllers
             if (product is null) return NotFound("The product deos not exist");
             return Ok(product);
         }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> Getproducts()
         {
