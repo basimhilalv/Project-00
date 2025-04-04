@@ -33,10 +33,12 @@ builder.Services.AddDbContext<UserDbContext>(options =>
 );
 
 builder.Services.AddAutoMapper(typeof(ProjectMapping));
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<IProductServices, ProductServices>();
 builder.Services.AddScoped<ICategoryServices, CategoryServices>();
+builder.Services.AddScoped<ICartServices, CartServices>();
 
 builder.Services.AddSwaggerGen(opt =>
 {
