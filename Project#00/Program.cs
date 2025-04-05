@@ -40,6 +40,7 @@ builder.Services.AddScoped<IProductServices, ProductServices>();
 builder.Services.AddScoped<ICategoryServices, CategoryServices>();
 builder.Services.AddScoped<ICartServices, CartServices>();
 builder.Services.AddScoped<IWishlistServices, WishlistServices>();
+builder.Services.AddScoped<IPaymentServices, PaymentServices>();
 
 builder.Services.AddSwaggerGen(opt =>
 {
