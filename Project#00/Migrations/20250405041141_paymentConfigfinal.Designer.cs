@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project_00.Data;
 
@@ -11,9 +12,11 @@ using Project_00.Data;
 namespace Project_00.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250405041141_paymentConfigfinal")]
+    partial class paymentConfigfinal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,9 +33,6 @@ namespace Project_00.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("PaymentCartId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -43,8 +43,6 @@ namespace Project_00.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PaymentCartId");
 
                     b.HasIndex("ProductId");
 
@@ -70,30 +68,6 @@ namespace Project_00.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Project_00.Models.PaymentCart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("PaymentCarts");
-                });
-
             modelBuilder.Entity("Project_00.Models.PaymentProduct", b =>
                 {
                     b.Property<int>("Id")
@@ -109,9 +83,6 @@ namespace Project_00.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
@@ -195,10 +166,6 @@ namespace Project_00.Migrations
 
             modelBuilder.Entity("Project_00.Models.Cart", b =>
                 {
-                    b.HasOne("Project_00.Models.PaymentCart", null)
-                        .WithMany("Products")
-                        .HasForeignKey("PaymentCartId");
-
                     b.HasOne("Project_00.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
@@ -212,17 +179,6 @@ namespace Project_00.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Project_00.Models.PaymentCart", b =>
-                {
-                    b.HasOne("Project_00.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -274,11 +230,6 @@ namespace Project_00.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Project_00.Models.PaymentCart", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

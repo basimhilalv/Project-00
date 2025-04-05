@@ -14,5 +14,7 @@ namespace Project_00.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Cart> CartItems { get; set; }
         public DbSet<Wishlist> Wishlists { get; set; }
+        public DbSet<PaymentProduct> PaymentProducts { get; set; }
+        public DbSet<PaymentCart> PaymentCarts { get; set; }
     }
 }
