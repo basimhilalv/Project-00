@@ -9,7 +9,7 @@
         public decimal Amount { get; set; }
         public int Quantity { get; set; }
         public Guid UserId { get; set; }
-        public List<string>? Products { get; set; }
+        public List<ProductPurchase>? Products { get; set; }
 
     }
 }
