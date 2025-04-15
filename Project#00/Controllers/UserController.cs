@@ -28,5 +28,19 @@ namespace Project_00.Controllers
             if (result == null) return BadRequest();
             return Ok(result);
         }
+        [HttpGet("GetUsers")]
+        public async Task<ActionResult<IEnumerable<User>>> getusers()
+        {
+            var result = await _userServices.GetUsers();
+            if (result is null) return NotFound();
+            return Ok(result);
+        }
+        [HttpGet("GetUserById/{id}")]
+        public async Task<ActionResult<User>> getuserbyId(Guid id)
+        {
+            var result = await _userServices.GetUserById(id);
+            if (result is null) return NotFound();
+            return Ok(result);
+        }
     }
 }

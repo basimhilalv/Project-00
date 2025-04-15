@@ -16,6 +16,21 @@ namespace Project_00.Services
         {
             _context = context;
         }
+
+        public async Task<User> GetUserById(Guid id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user is null) return null;
+            return user;
+        }
+
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            var users = await _context.Users.ToListAsync();
+            if (users is null) return null;
+            return users;
+        }
+
         public async Task<string> LoginUser(UserDto request)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
