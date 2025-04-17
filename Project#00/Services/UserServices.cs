@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Project_00.Data;
+using Project_00.Dtos;
 using Project_00.Models;
+using Project_00.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -10,9 +12,9 @@ namespace Project_00.Services
 {
     public class UserServices : IUserServices
     {
-        private readonly UserDbContext _context;
+        private readonly Context _context;
 
-        public UserServices(UserDbContext context)
+        public UserServices(Context context)
         {
             _context = context;
         }

@@ -1,15 +1,17 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Project_00.Data;
+using Project_00.Dtos;
 using Project_00.Models;
+using Project_00.Services.Interfaces;
 
 namespace Project_00.Services
 {
     public class ProductServices : IProductServices
     {
-        private readonly UserDbContext _context;
+        private readonly Context _context;
         private readonly IMapper _mapper;
-        public ProductServices(UserDbContext context, IMapper mapper)
+        public ProductServices(Context context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

@@ -10,7 +10,7 @@ using Project_00.Data;
 
 namespace Project_00.Migrations
 {
-    [DbContext(typeof(UserDbContext))]
+    [DbContext(typeof(Context))]
     partial class UserDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

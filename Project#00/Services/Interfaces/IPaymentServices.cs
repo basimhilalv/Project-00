@@ -1,6 +1,7 @@
-﻿using Project_00.Models;
+﻿using Project_00.Dtos;
+using Project_00.Models;
 
-namespace Project_00.Services
+namespace Project_00.Services.Interfaces
 {
     public interface IPaymentServices
     {

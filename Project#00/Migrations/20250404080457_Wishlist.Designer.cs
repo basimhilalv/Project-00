@@ -11,7 +11,7 @@ using Project_00.Data;
 
 namespace Project_00.Migrations
 {
-    [DbContext(typeof(UserDbContext))]
+    [DbContext(typeof(Context))]
     [Migration("20250404080457_Wishlist")]
     partial class Wishlist
     {

@@ -11,7 +11,7 @@ using Project_00.Data;
 
 namespace Project_00.Migrations
 {
-    [DbContext(typeof(UserDbContext))]
+    [DbContext(typeof(Context))]
     [Migration("20250407053034_purchasedProductsupdate")]
     partial class purchasedProductsupdate
     {

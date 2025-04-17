@@ -3,9 +3,9 @@ using Project_00.Models;
 
 namespace Project_00.Data
 {
-    public class UserDbContext : DbContext
+    public class Context : DbContext
     {
-        public UserDbContext(DbContextOptions options) : base(options)
+        public Context(DbContextOptions options) : base(options)
         {
 
         }

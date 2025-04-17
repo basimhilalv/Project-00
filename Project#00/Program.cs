@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using Project_00.Data;
 using Project_00.Mappings;
 using Project_00.Services;
+using Project_00.Services.Interfaces;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,7 +29,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     }
     );
 
-builder.Services.AddDbContext<UserDbContext>(options =>
+builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 

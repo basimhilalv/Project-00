@@ -1,16 +1,18 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Project_00.Data;
+using Project_00.Dtos;
 using Project_00.Models;
+using Project_00.Services.Interfaces;
 
 namespace Project_00.Services
 {
     public class CategoryServices : ICategoryServices
     {
         private readonly IMapper _mapper;
-        private readonly UserDbContext _context;
+        private readonly Context _context;
 
-        public CategoryServices(IMapper mapper, UserDbContext context)
+        public CategoryServices(IMapper mapper, Context context)
         {
             _mapper = mapper;
             _context = context;

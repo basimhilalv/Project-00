@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project_00.Data;
+using Project_00.Dtos;
 using Project_00.Models;
+using Project_00.Services.Interfaces;
 using System.Security.Claims;
 
 namespace Project_00.Services
@@ -8,8 +10,8 @@ namespace Project_00.Services
     public class CartServices : ICartServices
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly UserDbContext _context;
-        public CartServices(IHttpContextAccessor httpContextAccessor, UserDbContext context)
+        private readonly Context _context;
+        public CartServices(IHttpContextAccessor httpContextAccessor, Context context)
         {
             _httpContextAccessor = httpContextAccessor;
             _context = context;

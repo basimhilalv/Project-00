@@ -1,14 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project_00.Data;
+using Project_00.Dtos;
 using Project_00.Migrations;
 using Project_00.Models;
+using Project_00.Services.Interfaces;
 
 namespace Project_00.Services
 {
     public class PaymentServices : IPaymentServices
     {
-        private readonly UserDbContext _context;
-        public PaymentServices(UserDbContext context)
+        private readonly Context _context;
+        public PaymentServices(Context context)
         {
             _context = context;
         }

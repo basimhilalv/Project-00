@@ -1,13 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project_00.Data;
+using Project_00.Dtos;
 using Project_00.Models;
+using Project_00.Services.Interfaces;
 
 namespace Project_00.Services
 {
     public class WishlistServices : IWishlistServices
     {
-        private readonly UserDbContext _context;
-        public WishlistServices(UserDbContext context)
+        private readonly Context _context;
+        public WishlistServices(Context context)
         {
             _context = context;
         }
