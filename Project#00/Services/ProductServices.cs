@@ -18,66 +18,107 @@ namespace Project_00.Services
         }
         public async Task<Product> AddProduct(ProductDto request)
         {
-            if(await _context.Products.AnyAsync(p => p.Name == request.Name))
+            try
             {
-                return null;
+                if(await _context.Products.AnyAsync(p => p.Name == request.Name))
+                {
+                    return null;
+                }
+                var product = _mapper.Map<Product>(request);
+                _context.Products.Add(product);
+                await _context.SaveChangesAsync();
+                return product;
+
+            }catch(Exception ex)
+            {
+                throw new Exception("Error occured while adding data", ex);
             }
-            var product = _mapper.Map<Product>(request);
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-            return product;
         }
 
         public async Task<Product> DeleteProduct(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if(product == null)
+            try
             {
-                return null;
+                var product = await _context.Products.FindAsync(id);
+                if(product == null)
+                {
+                    return null;
+                }
+                _context.Products.Remove(product);
+                await _context.SaveChangesAsync();
+                return product;
+
+            }catch(Exception ex)
+            {
+                throw new Exception("Error occured while deleting", ex);
             }
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-            return product;
 
         }
 
         public async Task<Product> GetProduct(int id)
         {
-            var product = await _context.Products.Include(p=>p.Category).FirstOrDefaultAsync(p=>p.Id == id);
-            if(product == null)
+            try
             {
-                return null;
+                var product = await _context.Products.Include(p=>p.Category).FirstOrDefaultAsync(p=>p.Id == id);
+                if(product == null)
+                {
+                    return null;
+                }
+                return product;
+
+            }catch(Exception ex)
+            {
+                throw new Exception("Error occured while fetching data", ex);
             }
-            return product;
         }
 
         public async Task<IEnumerable<Product>> GetProducts()
         {
-            var products = await _context.Products.Include(p=>p.Category).ToListAsync();
-            if (products is null) return null;
-            return products;
+            try
+            {
+                var products = await _context.Products.Include(p=>p.Category).ToListAsync();
+                if (products is null) return null;
+                return products;
+
+            }catch(Exception ex)
+            {
+                throw new Exception("Error occured while fetching data", ex);
+            }
         }
 
         public async Task<IEnumerable<Product>> GetProductsByCategory(string category)
         {
-            var products = await _context.Products
-                .Include(p=>p.Category)
-                .Where(p => p.Category.Name == category)
-                .ToListAsync();
+            try
+            {
+                var products = await _context.Products
+                    .Include(p=>p.Category)
+                    .Where(p => p.Category.Name == category)
+                    .ToListAsync();
             
-            if (products is null) return null;
-            return products;
+                if (products is null) return null;
+                return products;
+
+            }catch(Exception ex)
+            {
+                throw new Exception("Error occured while fetching data", ex);
+            }
         }
 
         public async Task<Product> UpdateProduct(int id, ProductDto request)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product is null) return null;
-            product.Price = request.Price;
-            product.Name = request.Name;
-            product.CategoryId = request.CategoryId;
-            await _context.SaveChangesAsync();
-            return product;
+            try
+            {
+                var product = await _context.Products.FindAsync(id);
+                if (product is null) return null;
+                product.Price = request.Price;
+                product.Name = request.Name;
+                product.CategoryId = request.CategoryId;
+                await _context.SaveChangesAsync();
+                return product;
+            }catch(Exception ex)
+            {
+                throw new Exception("Error occured while fetching data", ex);
+            }
         }
     }
 }
