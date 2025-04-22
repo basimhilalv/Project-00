@@ -7,7 +7,7 @@ namespace Project_00.Services.Interfaces
     {
         public Task<string> RegisterUser(UserDto request);
         public Task<string> LoginUser(UserDto request);
-        public Task<IEnumerable<User>> GetUsers();
-        public Task<User> GetUserById(Guid id);
+        public Task<UserResponseDto> GetUsers();
+        public Task<UserResponseDto> GetUserById(Guid id);
     }
 }

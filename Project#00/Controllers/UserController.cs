@@ -30,17 +30,17 @@ namespace Project_00.Controllers
             return Ok(result);
         }
         [HttpGet("GetUsers")]
-        public async Task<ActionResult<IEnumerable<User>>> getusers()
+        public async Task<ActionResult<UserResponseDto>> getusers()
         {
             var result = await _userServices.GetUsers();
-            if (result is null) return NotFound();
+            if (result.Data is null) return NotFound(result);
             return Ok(result);
         }
         [HttpGet("GetUserById/{id}")]
-        public async Task<ActionResult<User>> getuserbyId(Guid id)
+        public async Task<ActionResult<UserResponseDto>> getuserbyId(Guid id)
         {
             var result = await _userServices.GetUserById(id);
-            if (result is null) return NotFound();
+            if (result.Data is null) return NotFound(result);
             return Ok(result);
         }
     }

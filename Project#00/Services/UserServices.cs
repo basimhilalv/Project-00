@@ -19,42 +19,101 @@ namespace Project_00.Services
             _context = context;
         }
 
-        public async Task<User> GetUserById(Guid id)
+        public async Task<UserResponseDto> GetUserById(Guid id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user is null) return null;
-            return user;
+            try
+            {
+                var user = await _context.Users.FindAsync(id);
+                if (user is null)
+                {
+                    var usererror = new UserResponseDto()
+                    {
+                        Message = "There is no User available",
+                        Data = null,
+                        Error = true
+                    };
+                    return usererror;
+                }
+                var userresponse = new UserResponseDto()
+                {
+                    Message = "User is available here",
+                    Data = (IEnumerable<User>)user,
+                    Error = false
+                };
+                return userresponse;
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error occured while fetching data", ex);
+            }
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<UserResponseDto> GetUsers()
         {
-            var users = await _context.Users.ToListAsync();
-            if (users is null) return null;
-            return users;
+            try
+            {
+                var users = await _context.Users.Where(u=> u.Role == "User").ToListAsync();
+                if (users is null || !users.Any())
+                {
+                    var usererror = new UserResponseDto()
+                    {
+                        Message = "There are no Users available",
+                        Data = null,
+                        Error = true
+                    };
+                    return usererror;
+                }
+                var user = new UserResponseDto()
+                {
+                    Message = "List of available users",
+                    Data = users,
+                    Error = false
+                };
+                return user;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error occured while fetching users", ex);
+            }
         }
 
         public async Task<string> LoginUser(UserDto request)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
-            if (user is null) return null;
-            if (!BCrypt.Net.BCrypt.Verify(request.Password,user.Password)) return null;
-            var token = CreateToken(user);
-            return token;
+            try
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == request.Username && u.IsActive);
+                if (user is null) return null;
+                if (!BCrypt.Net.BCrypt.Verify(request.Password,user.Password)) return null;
+                var token = CreateToken(user);
+                return token;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error occured while fetching data", ex);
+            }
         }
 
         public async Task<string> RegisterUser(UserDto request)
         {
-            if(await _context.Users.AnyAsync(u=> u.Username == request.Username))
+            try
             {
-                return null;
-            }
+                if(await _context.Users.AnyAsync(u=> u.Username == request.Username))
+                {
+                    return null;
+                }
 
-            var user = new User();
-            user.Username = request.Username;
-            user.Password = BCrypt.Net.BCrypt.HashPassword(request.Password);
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            return "User Registered";
+                var user = new User();
+                user.Username = request.Username;
+                user.Password = BCrypt.Net.BCrypt.HashPassword(request.Password);
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+                return "User Registered";
+
+            }catch(Exception ex)
+            {
+                throw new Exception("Error occured while fetching data", ex);
+            }
         }
 
         private string CreateToken(User user)
