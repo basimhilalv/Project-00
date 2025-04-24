@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project_00.Data;
 
@@ -11,9 +12,11 @@ using Project_00.Data;
 namespace Project_00.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250424054830_addresschangeagain")]
+    partial class addresschangeagain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,6 +167,8 @@ namespace Project_00.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddressId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("PaymentCarts");
@@ -196,6 +201,8 @@ namespace Project_00.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("ProductId");
 
@@ -345,17 +352,31 @@ namespace Project_00.Migrations
 
             modelBuilder.Entity("Project_00.Models.PaymentCart", b =>
                 {
+                    b.HasOne("Project_00.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Project_00.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Address");
+
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("Project_00.Models.PaymentProduct", b =>
                 {
+                    b.HasOne("Project_00.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Project_00.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
@@ -367,6 +388,8 @@ namespace Project_00.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Address");
 
                     b.Navigation("Product");
 

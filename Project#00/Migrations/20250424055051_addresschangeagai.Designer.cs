@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project_00.Data;
 
@@ -11,9 +12,11 @@ using Project_00.Data;
 namespace Project_00.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250424055051_addresschangeagai")]
+    partial class addresschangeagai
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

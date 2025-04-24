@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project_00.Dtos;
 using Project_00.Models;
@@ -29,6 +30,7 @@ namespace Project_00.Controllers
             if (result == null) return BadRequest();
             return Ok(result);
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetUsers")]
         public async Task<ActionResult<UserResponseDto>> getusers()
         {
@@ -36,6 +38,7 @@ namespace Project_00.Controllers
             if (result.Data is null) return NotFound(result);
             return Ok(result);
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetUserById/{id}")]
         public async Task<ActionResult<UserResponseDto>> getuserbyId(Guid id)
         {

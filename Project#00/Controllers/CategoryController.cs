@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project_00.Dtos;
 using Project_00.Models;
@@ -29,6 +30,7 @@ namespace Project_00.Controllers
             if (category is null) return NotFound("Category Not Found");
             return Ok(category);
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost("Create")]
         public async Task<ActionResult<Category>> AddCategory(CategoryDto request)
         {
@@ -36,6 +38,7 @@ namespace Project_00.Controllers
             if (create is null) return BadRequest("Category already exists");
             return Ok(create);
         }
+        [Authorize(Roles = "Admin")]
         [HttpPut("Update")]
         public async Task<ActionResult<Category>> UpdateCategory(int id, CategoryDto request)
         {
@@ -43,6 +46,7 @@ namespace Project_00.Controllers
             if (update is null) return BadRequest("Category not found");
             return Ok(update);
         }
+        [Authorize(Roles = "Admin")]
         [HttpDelete("Delete")]
         public async Task<ActionResult> DeleteCategory(int id)
         {

@@ -39,6 +39,7 @@ namespace Project_00.Controllers
             if (products is null) return NotFound("There are no products in the category");
             return Ok(products);
         }
+        [Authorize(Roles = "Admin")] //basimhilal@gmail.com 12345678a#
         [HttpPost("Create")]
         public async Task<ActionResult<Product>> AddProduct(ProductDto request)
         {
@@ -46,6 +47,7 @@ namespace Project_00.Controllers
             if (create is null) return BadRequest("Product already exist");
             return Ok(create);
         }
+        [Authorize(Roles = "Admin")]
         [HttpPut("Update")]
         public async Task<ActionResult<Product>> UpdateProduct(int id, ProductDto request)
         {
@@ -53,6 +55,7 @@ namespace Project_00.Controllers
             if (update is null) return BadRequest("Product not available");
             return Ok(update);
         }
+        [Authorize(Roles = "Admin")]
         [HttpDelete("Delete")]
         public async Task<ActionResult> DeleteProduct(int id)
         {

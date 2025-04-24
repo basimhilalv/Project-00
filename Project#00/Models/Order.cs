@@ -8,6 +8,7 @@
         public int PaymentId { get; set; }
         public decimal Amount { get; set; }
         public int Quantity { get; set; }
+        public int AddressId { get; set; }
         public Guid UserId { get; set; }
         public List<ProductPurchase>? Products { get; set; }
 

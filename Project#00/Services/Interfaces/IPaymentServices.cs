@@ -6,6 +6,6 @@ namespace Project_00.Services.Interfaces
     public interface IPaymentServices
     {
         public Task<PaymentProduct> MakePaymentProduct(PaymentProductDto payment, Guid userID);
-        public Task<PaymentCart> MakePaymentCart(Guid userID);
+        public Task<PaymentCart> MakePaymentCart(PaymentCartDto request, Guid userID);
     }
 }

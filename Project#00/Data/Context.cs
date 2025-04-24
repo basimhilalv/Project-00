@@ -18,5 +18,6 @@ namespace Project_00.Data
         public DbSet<PaymentCart> PaymentCarts { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ProductPurchase> ProductPurachases { get; set; }
+        public DbSet<Address> Addresses { get; set; }
     }
 }

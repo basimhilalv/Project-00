@@ -14,7 +14,7 @@ namespace Project_00.Services
         {
             _context = context;
         }
-        public async Task<PaymentCart> MakePaymentCart(Guid userID)
+        public async Task<PaymentCart> MakePaymentCart(PaymentCartDto request, Guid userID)
         {
             try
             {
@@ -27,6 +27,7 @@ namespace Project_00.Services
                 payment.UserId = userID;
                 payment.PaymentDate = DateTime.UtcNow;
                 payment.Products = cartItems;
+                payment.AddressId = request.AddressId;
                 _context.PaymentCarts.Add(payment);
 
                 List<ProductPurchase> products = new List<ProductPurchase>();
@@ -52,6 +53,7 @@ namespace Project_00.Services
                 order.PaymentId = payment.Id;
                 order.Quantity = cartItems.Sum(c => c.Quantity);
                 order.Products = products;
+                order.AddressId = request.AddressId;
                 _context.Orders.Add(order);
 
                 _context.CartItems.RemoveRange(cartItems);
@@ -78,6 +80,7 @@ namespace Project_00.Services
                 payments.Quantity = payment.Quantity;
                 payments.Amount = totalAmount;
                 payments.UserId = userID;
+                payments.AddressId = payment.AddressId;
                 _context.PaymentProducts.Add(payments);
 
                 var productPurchase = new List<ProductPurchase>();
@@ -97,6 +100,7 @@ namespace Project_00.Services
                 order.PaymentId = payments.Id;
                 order.Quantity = payments.Quantity;
                 order.Products = productPurchase;
+                order.AddressId = payment.AddressId;
                 _context.Orders.Add(order);
                 await _context.SaveChangesAsync();
                 return payments;

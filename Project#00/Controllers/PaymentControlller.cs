@@ -20,7 +20,7 @@ namespace Project_00.Controllers
         }
         [Authorize]
         [HttpPost("CartPayment")]
-        public async Task<ActionResult<PaymentCart>> makepaymentcart()
+        public async Task<ActionResult<PaymentCart>> makepaymentcart(PaymentCartDto request)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userId is null)
@@ -28,7 +28,7 @@ namespace Project_00.Controllers
                 return Unauthorized();
             }
             Guid userIdguid = Guid.Parse(userId);
-            var payment = await _paymentServices.MakePaymentCart(userIdguid);
+            var payment = await _paymentServices.MakePaymentCart(request,userIdguid);
             if (payment is null) return BadRequest();
             return Ok(payment);
         }

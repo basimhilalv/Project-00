@@ -41,6 +41,7 @@ namespace Project_00.Controllers
             if (dash is null) return NotFound();
             return Ok(dash);
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet("AdminDash")]
         public async Task<ActionResult<Dashboard>> GetAdminDash()
         {

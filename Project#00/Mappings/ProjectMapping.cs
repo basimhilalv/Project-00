@@ -16,6 +16,8 @@ namespace Project_00.Mappings
             CreateMap<CategoryDto, Category>();
             CreateMap<Cart, CartDto>();
             CreateMap<CartDto, Cart>();
+            CreateMap<Address, AddressDto>();
+            CreateMap<AddressDto, Address>();
         }
     }
 }
