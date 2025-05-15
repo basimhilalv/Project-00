@@ -39,11 +39,12 @@ namespace Project_00.Controllers
             if (products is null) return NotFound("There are no products in the category");
             return Ok(products);
         }
-        [Authorize(Roles = "Admin")] //basimhilal@gmail.com 12345678a#
+        //[Authorize(Roles = "Admin")] //basimhilal@gmail.com 12345678a#
         [HttpPost("Create")]
-        public async Task<ActionResult<Product>> AddProduct(ProductDto request)
+        public async Task<ActionResult<Product>> AddProduct([FromForm] ProductDto request, IFormFile image)
         {
-            var create = await _productServices.AddProduct(request);
+            //Console.WriteLine($"Your image link is {image.ContentType} and {image.Length}");
+            var create = await _productServices.AddProduct(request, image);
             if (create is null) return BadRequest("Product already exist");
             return Ok(create);
         }

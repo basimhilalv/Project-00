@@ -15,7 +15,7 @@ namespace Project_00.Services.ProductService
             _context = context;
             _mapper = mapper;
         }
-        public async Task<Product> AddProduct(ProductDto request)
+        public async Task<Product> AddProduct(ProductDto request, IFormFile image)
         {
             try
             {

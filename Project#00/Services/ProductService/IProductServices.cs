@@ -8,7 +8,7 @@ namespace Project_00.Services.ProductService
         public Task<Product> GetProduct(int id);
         public Task<IEnumerable<Product>> GetProducts();
         public Task<IEnumerable<Product>> GetProductsByCategory(string category);
-        public Task<Product> AddProduct(ProductDto request);
+        public Task<Product> AddProduct(ProductDto request, IFormFile image);
         public Task<Product> UpdateProduct(int id, ProductDto request);
         public Task<Product> DeleteProduct(int id);
     }
