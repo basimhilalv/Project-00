@@ -3,12 +3,11 @@ using Microsoft.IdentityModel.Tokens;
 using Project_00.Data;
 using Project_00.Dtos;
 using Project_00.Models;
-using Project_00.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Project_00.Services
+namespace Project_00.Services.UserService
 {
     public class UserServices : IUserServices
     {
@@ -17,6 +16,22 @@ namespace Project_00.Services
         public UserServices(Context context)
         {
             _context = context;
+        }
+
+        public async Task<string> BlockUser(Guid id)
+        {
+            try
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Role == "User" && u.Id == id);
+                if (user is null) return null;
+                if (!user.IsActive) return "User is already blocked";
+                user.IsActive = false;
+                await _context.SaveChangesAsync();
+                return "User is blocked";
+            }catch(Exception ex)
+            {
+                throw new Exception("Error occured while blocking user");
+            }
         }
 
         public async Task<UserResponseDto> GetUserById(Guid id)
@@ -113,6 +128,23 @@ namespace Project_00.Services
             }catch(Exception ex)
             {
                 throw new Exception("Error occured while fetching data", ex);
+            }
+        }
+
+        public async Task<string> UnblockUser(Guid id)
+        {
+            try
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Role == "User" && u.Id == id);
+                if (user is null) return null;
+                if (user.IsActive) return "User is already unblocked";
+                user.IsActive = true;
+                await _context.SaveChangesAsync();
+                return "User is unblocked";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error occured while unblocking user");
             }
         }
 

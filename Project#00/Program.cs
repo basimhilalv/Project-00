@@ -4,8 +4,14 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Project_00.Data;
 using Project_00.Mappings;
-using Project_00.Services;
-using Project_00.Services.Interfaces;
+using Project_00.Services.AddressService;
+using Project_00.Services.CartService;
+using Project_00.Services.CategoryService;
+using Project_00.Services.OrderService;
+using Project_00.Services.PaymentService;
+using Project_00.Services.ProductService;
+using Project_00.Services.UserService;
+using Project_00.Services.WishlistService;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);

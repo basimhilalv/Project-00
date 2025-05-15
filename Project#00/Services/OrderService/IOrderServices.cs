@@ -1,6 +1,6 @@
 ﻿using Project_00.Models;
 
-namespace Project_00.Services.Interfaces
+namespace Project_00.Services.OrderService
 {
     public interface IOrderServices
     {

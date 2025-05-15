@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project_00.Data;
 using Project_00.Models;
-using Project_00.Services.Interfaces;
 
-namespace Project_00.Services
+namespace Project_00.Services.OrderService
 {
     public class OrderServices : IOrderServices
     {

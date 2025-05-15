@@ -1,7 +1,7 @@
 ﻿using Project_00.Dtos;
 using Project_00.Models;
 
-namespace Project_00.Services.Interfaces
+namespace Project_00.Services.WishlistService
 {
     public interface IWishlistServices
     {

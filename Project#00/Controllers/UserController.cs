@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project_00.Dtos;
 using Project_00.Models;
-using Project_00.Services.Interfaces;
+using Project_00.Services.UserService;
 
 namespace Project_00.Controllers
 {
@@ -44,6 +44,22 @@ namespace Project_00.Controllers
         {
             var result = await _userServices.GetUserById(id);
             if (result.Data is null) return NotFound(result);
+            return Ok(result);
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpPut("BlockUser")]
+        public async Task<ActionResult<string>> blockUser(Guid id)
+        {
+            var result = await _userServices.BlockUser(id);
+            if (result is null) return NotFound();
+            return Ok(result);
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpPut("UnblockUser")]
+        public async Task<ActionResult<string>> unblockUser(Guid id)
+        {
+            var result = await _userServices.UnblockUser(id);
+            if (result is null) return NotFound();
             return Ok(result);
         }
     }

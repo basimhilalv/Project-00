@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
 using Project_00.Dtos;
 using Project_00.Models;
-using Project_00.Services.Interfaces;
+using Project_00.Services.PaymentService;
 using System.Security.Claims;
 
 namespace Project_00.Controllers

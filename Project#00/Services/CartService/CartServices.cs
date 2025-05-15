@@ -2,10 +2,9 @@
 using Project_00.Data;
 using Project_00.Dtos;
 using Project_00.Models;
-using Project_00.Services.Interfaces;
 using System.Security.Claims;
 
-namespace Project_00.Services
+namespace Project_00.Services.CartService
 {
     public class CartServices : ICartServices
     {
